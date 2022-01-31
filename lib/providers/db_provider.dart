@@ -1,10 +1,9 @@
-
-
-
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:qr_scanner_app/models/scan_model.dart';
+export 'package:qr_scanner_app/models/scan_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DBProvider{
@@ -12,7 +11,7 @@ class DBProvider{
   static final DBProvider db = DBProvider._();
   DBProvider._();
 
-  Future<Database> get databse async {
+  Future<Database> get database async {
     if(_database != null) return _database!;
 
     _database = await initDB();
@@ -36,5 +35,25 @@ class DBProvider{
             )
           ''');
         });
+  }
+
+
+  Future<int> newScanRaw(ScanModel newScan) async {
+    final id = newScan.id;
+    final type = newScan.type;
+    final value = newScan.value;
+
+    final db = await database;
+    final res = db.rawInsert('''
+      INSERT INTO Scans(id, type, value)
+        VALUES($id, $type, $value)
+    ''');
+    return res;
+  }
+
+  Future<int> newScan(ScanModel newScan) async {
+    final db = await database;
+    final res = await db.insert('Scans', newScan.toJson());
+    return res;
   }
 }

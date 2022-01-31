@@ -10,7 +10,7 @@ class ScanModel {
     this.type = "https",
     required this.value,
   }){
-    if(type.contains('http')){
+    if(value.contains('http')){
       type = 'http';
     }else{
       type = 'geo';
