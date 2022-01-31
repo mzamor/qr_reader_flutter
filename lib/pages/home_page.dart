@@ -40,9 +40,7 @@ class HomePageBody extends StatelessWidget {
 
     final currentIndex = uiProvider.selectedMenuOpt;
 
-   // final tempScan = ScanModel(value: 'http://www.clarin.com.ar');
-
-    DBProvider.db.getAllScans();
+    DBProvider.db.deleteAllScans();
 
     switch (currentIndex) {
       case 0:
