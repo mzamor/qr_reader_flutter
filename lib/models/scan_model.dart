@@ -4,9 +4,9 @@ ScanModel scanModelFromJson(String str) => ScanModel.fromJson(json.decode(str));
 
 String scanModelToJson(ScanModel data) => json.encode(data.toJson());
 
-class ScanModel {
+class ScanModel  {
   ScanModel({
-    this.id = 1,
+    this.id,
     this.type = "https",
     required this.value,
   }){
@@ -17,7 +17,7 @@ class ScanModel {
     }
   }
 
-  int id;
+  int? id;
   String type;
   String value;
 
