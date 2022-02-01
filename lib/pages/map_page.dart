@@ -12,12 +12,19 @@ class MapsPage extends StatelessWidget {
 
     return  ListView.builder(
       itemCount: scans.length,
-        itemBuilder: (_, index) => ListTile(
-          leading: Icon(Icons.map, color: Theme.of(context).primaryColor,),
-          title: Text(scans[index].value),
-          subtitle: Text(scans[index].id.toString()),
-          trailing: const Icon(Icons.keyboard_arrow_right, color: Colors.grey,),
-          onTap: () => debugPrint(scans[index].id.toString()),
+        itemBuilder: (_, index) => Dismissible(
+          key: UniqueKey(),
+          background: Container(
+            color: Colors.red,
+          ),
+          onDismissed: (direction) => Provider.of<ScanListProvider>(context, listen: false).deleteScansById(scans[index].id!),
+          child: ListTile(
+            leading: Icon(Icons.map, color: Theme.of(context).primaryColor,),
+            title: Text(scans[index].value),
+            subtitle: Text(scans[index].id.toString()),
+            trailing: const Icon(Icons.keyboard_arrow_right, color: Colors.grey,),
+            onTap: () => debugPrint(scans[index].id.toString()),
+          ),
         ),);
   }
 }
