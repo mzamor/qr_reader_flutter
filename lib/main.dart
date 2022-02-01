@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_scanner_app/pages/home_page.dart';
+import 'package:qr_scanner_app/pages/maps_page.dart';
 import 'package:qr_scanner_app/pages/map_page.dart';
 import 'package:qr_scanner_app/providers/scan_list_provider.dart';
 import 'package:qr_scanner_app/providers/ui_provider.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         initialRoute: 'home',
         routes: {
           'home': (_) => const HomePage(),
-          'maps':  (_) => const MapsPage(),
+          'map':  (_) => const MapPage(),
         },
         theme: ThemeData(
           primaryColor: Colors.purple,
