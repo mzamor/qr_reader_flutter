@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_scanner_app/pages/map_page.dart';
 import 'package:qr_scanner_app/providers/db_provider.dart';
+import 'package:qr_scanner_app/providers/scan_list_provider.dart';
 import 'package:qr_scanner_app/providers/ui_provider.dart';
 import 'package:qr_scanner_app/widgets/custom_navigatorbar.dart';
 import 'package:qr_scanner_app/widgets/scan_button.dart';
@@ -40,13 +41,16 @@ class HomePageBody extends StatelessWidget {
 
     final currentIndex = uiProvider.selectedMenuOpt;
 
-    DBProvider.db.deleteAllScans();
+    final scanListProvider = Provider.of<ScanListProvider>(context, listen: false);
+
 
     switch (currentIndex) {
       case 0:
+        scanListProvider.loadScansByType('geo');
         return const MapsPage();
 
       case 1:
+        scanListProvider.loadScansByType('http');
         return const AddressesPage();
 
       default:
